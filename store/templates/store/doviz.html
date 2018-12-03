@@ -1,0 +1,62 @@
+{% extends 'store/base.html' %}
+{% load store_extras %}
+{% block content %}
+
+<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd999;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(47, 7, 100);
+    opacity:0.6;
+    color: white;
+}
+</style>
+
+<table id="customers">
+        <thead>
+    <tr>
+        <th>Agence</th>
+        <th>Total Euro</th>
+        <th>Total TL</th>
+        <th>Prix Euro</th>
+        <th>Total Now</th>
+        <th>Final</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Kuveyt Türk</td>
+        <td rowspan=2>{{ total_base_euro|currency:2 }} €</td>
+        <td rowspan=2 id="toto">{{ total_base_tl|currency:2 }} &#8378;</td>
+        <td style="color:blue">{{ prixEuro|currency:4 }} &#8378;</td>
+        <td>{{ total_new_kuveyt|currency:2 }} €</td>
+        <td style="color: {% if finalRes_kuveyt < 0 %}red{% else %}green{% endif %}">{{ finalRes_kuveyt|currency:2 }} €</td>
+    </tr>
+    <tr>
+        <td>Doviz.com</td>
+        <td style="color:blue">{{ prixDoviz|currency:4 }} &#8378;</td>
+        <td>{{ total_new_doviz|currency:2 }} €</td>
+        <td style="color: {% if finalRes_doviz < 0 %}red{% else %}green{% endif %}">{{ finalRes_doviz|currency:2 }} €</td>
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}
+
+
